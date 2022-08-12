@@ -27,4 +27,5 @@ public class TradeService  implements TradeServiceInterface{
     public Trade addNewTrade(Trade trade) {
         return dao.save(trade);
     }
+
 }
