@@ -28,4 +28,6 @@ public class TradeController {
     public void addTrade(@RequestBody Trade trade){
         service.addNewTrade(trade);
     }
+
+
 }
