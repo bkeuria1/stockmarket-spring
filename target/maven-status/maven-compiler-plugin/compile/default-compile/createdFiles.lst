@@ -1,0 +1,6 @@
+com\project\springboot\AppConfig.class
+com\project\springboot\rest\TradeController.class
+com\project\springboot\service\TradeServiceInterface.class
+com\project\springboot\service\TradeService.class
+com\project\springboot\entities\Trade.class
+com\project\springboot\repo\TradeRepo.class
