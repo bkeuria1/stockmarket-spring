@@ -4,6 +4,7 @@ import com.project.springboot.entities.Trade;
 import com.project.springboot.service.TradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Collection;
 
@@ -24,10 +25,36 @@ public class TradeController {
         return service.getTradeByTicker(ticker);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/currentPrices/{ticker}")
+    public String  getCurrentPrice(@PathVariable("ticker")String ticker){
+        String url = "https://c4rm9elh30.execute-api.us-east-1.amazonaws.com/default/cachedPriceData?ticker=" + ticker;
+        return service.getApiData(url);
+
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/history")
+    public String getPrice(@RequestParam String ticker, @RequestParam String days){
+        String url =  "https://3p7zu95yg3.execute-api.us-east-1.amazonaws.com/default/priceFeed2?ticker="+ticker+"&num_days="+days;
+       return service.getApiData(url);
+
+    }
+
+    /*
+
+     */
+//    @RequestMapping(method = RequestMethod.GET, value = "/find")
+//    public String getPrice(@RequestParam String ticker){
+//        String url =  "https://3p7zu95yg3.execute-api.us-east-1.amazonaws.com/default/priceFeed2?ticker="+ticker+"&num_days="+days;
+//        String  result = restTemplate.getForObject(url,String.class);
+//        return result;
+//
+//    }
+
     @RequestMapping(method = RequestMethod.POST)
     public void addTrade(@RequestBody Trade trade){
         service.addNewTrade(trade);
     }
+
 
 
 }

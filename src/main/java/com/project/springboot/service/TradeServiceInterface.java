@@ -9,7 +9,6 @@ public interface TradeServiceInterface {
     Collection<Trade>getAllTrades();
     List<Trade> getTradeByTicker(String ticker);
     Trade addNewTrade(Trade trade);
-
-
+    String getApiData(String url);
 
 }

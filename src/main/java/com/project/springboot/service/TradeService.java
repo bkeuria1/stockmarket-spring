@@ -5,6 +5,7 @@ import com.project.springboot.entities.Trade;
 import com.project.springboot.repo.TradeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Collection;
 import java.util.List;
@@ -27,4 +28,12 @@ public class TradeService  implements TradeServiceInterface{
     public Trade addNewTrade(Trade trade) {
         return dao.save(trade);
     }
+
+    @Override
+    public String getApiData(String url) {
+        RestTemplate restTemplate = new RestTemplate();
+        String  result = restTemplate.getForObject(url,String.class);
+        return result;
+    }
+
 }
