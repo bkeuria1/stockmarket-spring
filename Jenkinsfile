@@ -1,4 +1,4 @@
-def projectName = 'spring-backend'
+def projectName = 'music-demo'
 def version = "0.0.${currentBuild.number}"
 def dockerImageTag = "${projectName}:${version}"
 
@@ -35,3 +35,4 @@ pipeline {
       }
     }
   }
+}
