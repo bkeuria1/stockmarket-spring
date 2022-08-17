@@ -15,9 +15,6 @@ public class TradeController {
     @Autowired
     private TradeService service;
 
-    private RestTemplate restTemplate = new RestTemplate();
-
-
     @RequestMapping(method = RequestMethod.GET)
     public Collection<Trade> getAllTrades(){
         return service.getAllTrades();
@@ -31,16 +28,14 @@ public class TradeController {
     @RequestMapping(method = RequestMethod.GET, value = "/currentPrices/{ticker}")
     public String  getCurrentPrice(@PathVariable("ticker")String ticker){
         String url = "https://c4rm9elh30.execute-api.us-east-1.amazonaws.com/default/cachedPriceData?ticker=" + ticker;
-        String  result = restTemplate.getForObject(url,String.class);
-        return result;
+        return service.getApiData(url);
 
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/history")
     public String getPrice(@RequestParam String ticker, @RequestParam String days){
         String url =  "https://3p7zu95yg3.execute-api.us-east-1.amazonaws.com/default/priceFeed2?ticker="+ticker+"&num_days="+days;
-        String  result = restTemplate.getForObject(url,String.class);
-        return result;
+       return service.getApiData(url);
 
     }
 
