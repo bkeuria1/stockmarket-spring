@@ -1,24 +1,21 @@
-def projectName = 'music-demo'
+def projectName = 'spring-backend-project'
 def version = "0.0.${currentBuild.number}"
 def dockerImageTag = "${projectName}:${version}"
 
 pipeline {
   agent any
-   tools {
-          maven 'Maven 3.3.9'
-          jdk 'jdk8'
-      }
 
   stages {
     stage('Test') {
       steps {
-       sh 'mvn clean'
+        sh 'chmod a+x mvnw'
+        sh './mvnw clean test'
       }
     }
 
     stage('Build') {
       steps {
-        sh 'mvn package'
+        sh './mvnw package'
       }
     }
 
