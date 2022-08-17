@@ -18,11 +18,13 @@ public class Trade implements Serializable {
     @Column(name = "shares")private Integer shares;
     @Column(name = "date")private Date date;
 
+
+    @Column(name = "buying")private boolean buying;
     public Trade(){
 
     }
 
-    public Trade(int id, String ticker, String currency, Double price, Integer shares, Date date) {
+    public Trade(int id, String ticker, String currency, Double price, Integer shares, Date date,boolean buying) {
 
         this.id = id;
         this.ticker = ticker;
@@ -30,6 +32,7 @@ public class Trade implements Serializable {
         this.price = price;
         this.shares = shares;
         this.date = date;
+        this.buying = buying;
     }
 
     public int getId() {
@@ -79,4 +82,13 @@ public class Trade implements Serializable {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    public boolean isBuying() {
+        return buying;
+    }
+
+    public void setBuying(boolean buying) {
+        this.buying = buying;
+    }
+
 }
