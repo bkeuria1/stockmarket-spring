@@ -1,1 +1,5 @@
-<p>trade-history works!</p>
+<div class="film-item-container">
+    <div *ngFor="let t of trades | async">
+        <p>{{t.ticker}}</p>
+    </div>
+</div>

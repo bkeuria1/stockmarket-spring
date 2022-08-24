@@ -7,6 +7,8 @@ import { TradeHistoryComponent } from './trade-history/trade-history.component';
 import { BuyAndSellComponent } from './buy-and-sell/buy-and-sell.component';
 import { AccountStatusComponent } from './account-status/account-status.component';
 
+import {HttpClientModule} from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +18,8 @@ import { AccountStatusComponent } from './account-status/account-status.componen
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
