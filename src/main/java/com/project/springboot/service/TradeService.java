@@ -11,9 +11,10 @@ import java.util.Collection;
 import java.util.List;
 
 @Service
-public class TradeService  implements TradeServiceInterface{
+public class TradeService  implements TradeServiceInterface {
     @Autowired
     private TradeRepo dao;
+
     @Override
     public Collection<Trade> getAllTrades() {
         return dao.findAll();
@@ -21,7 +22,7 @@ public class TradeService  implements TradeServiceInterface{
 
     @Override
     public List<Trade> getTradeByTicker(String ticker) {
-       return dao.findByTicker(ticker);
+        return dao.findByTicker(ticker);
     }
 
     @Override
@@ -32,8 +33,18 @@ public class TradeService  implements TradeServiceInterface{
     @Override
     public String getApiData(String url) {
         RestTemplate restTemplate = new RestTemplate();
-        String  result = restTemplate.getForObject(url,String.class);
+        String result = restTemplate.getForObject(url, String.class);
         return result;
     }
 
+    @Override
+    public int getCurrentAmountShares(String ticker) {
+        return dao.getCurrentAmountShares(ticker);
+
+    }
+
+    @Override
+    public List<String> getAllTickers() {
+        return dao.getAllTickers();
+    }
 }

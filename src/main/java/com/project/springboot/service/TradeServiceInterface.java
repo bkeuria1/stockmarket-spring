@@ -6,9 +6,11 @@ import java.util.Collection;
 import java.util.List;
 
 public interface TradeServiceInterface {
-    Collection<Trade>getAllTrades();
+     Collection<Trade>getAllTrades();
     List<Trade> getTradeByTicker(String ticker);
     Trade addNewTrade(Trade trade);
     String getApiData(String url);
+    int getCurrentAmountShares(String ticker);
+    List<String>getAllTickers();
 
 }
