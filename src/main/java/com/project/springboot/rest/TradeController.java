@@ -1,5 +1,6 @@
 package com.project.springboot.rest;
 
+import com.project.springboot.entities.TickerSummary;
 import com.project.springboot.entities.Trade;
 import com.project.springboot.service.TradeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,11 @@ public class TradeController {
     @RequestMapping(method = RequestMethod.GET, value = "/stockValue")
     public float getStockValue(@RequestParam String ticker){
         return service.getStockValue(ticker);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/tickerSummary")
+    public TickerSummary getTickerSummary(@RequestParam String ticker){
+        return new TickerSummary(ticker, service.getStockValue(ticker), service.getCurrentAmountShares(ticker), 100, 200);
     }
 
     @RequestMapping(method = RequestMethod.POST)

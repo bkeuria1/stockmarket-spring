@@ -50,4 +50,6 @@ public class TradeService  implements TradeServiceInterface {
 
     @Override
     public float getStockValue(String ticker) { return dao.getStockValue(ticker); }
+
+
 }
