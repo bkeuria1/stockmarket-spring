@@ -1,5 +1,20 @@
-<div class="film-item-container">
-    <div *ngFor="let t of trades | async">
-        <p>{{t.ticker}}</p>
-    </div>
-</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Ticker</th>
+            <th scope="col">Price</th>
+            <th scope="col">Currency</th>
+            <th scope="col">Shares</th>
+            <th scope="col">Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let t of trades | async">
+            <td>{{t.ticker}}</td>
+            <td>{{t.price}}</td>
+            <td>{{t.currency}}</td>
+            <td>{{t.shares}}</td>
+            <td>{{t.date | date:'mediumDate'}}</td>
+        </tr>
+    </tbody>
+</table>
