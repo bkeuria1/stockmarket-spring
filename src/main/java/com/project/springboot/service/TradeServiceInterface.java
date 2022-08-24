@@ -12,5 +12,5 @@ public interface TradeServiceInterface {
     String getApiData(String url);
     int getCurrentAmountShares(String ticker);
     List<String>getAllTickers();
-
+    float getStockValue(String ticker);
 }

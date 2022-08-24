@@ -3,6 +3,7 @@ package com.project.springboot.rest;
 import com.project.springboot.entities.Trade;
 import com.project.springboot.service.TradeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -42,6 +43,11 @@ public class TradeController {
     @RequestMapping(method = RequestMethod.GET, value = "/total")
     public int getTotalShares(@RequestParam String ticker){
         return service.getCurrentAmountShares(ticker);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/stockValue")
+    public float getStockValue(@RequestParam String ticker){
+        return service.getStockValue(ticker);
     }
 
     @RequestMapping(method = RequestMethod.POST)

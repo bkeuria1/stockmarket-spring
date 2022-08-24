@@ -47,4 +47,7 @@ public class TradeService  implements TradeServiceInterface {
     public List<String> getAllTickers() {
         return dao.getAllTickers();
     }
+
+    @Override
+    public float getStockValue(String ticker) { return dao.getStockValue(ticker); }
 }
