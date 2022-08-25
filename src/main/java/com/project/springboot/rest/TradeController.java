@@ -59,10 +59,10 @@ public class TradeController {
         String url = "https://3p7zu95yg3.execute-api.us-east-1.amazonaws.com/default/priceFeed2?ticker="+ticker+"&num_days=1";
         ApiResponse apiResponse = service.getApiData(url);
         float position = service.getStockValue(ticker);
-        float price = apiResponse.getPriceData().get(0).getValue();
+        float currentPrice = apiResponse.getPriceData().get(0).getValue();
         int shares = service.getCurrentAmountShares(ticker);
-        float profit = shares*price - position;
-        return new TickerSummary(ticker, position, shares, profit, price);
+        float profit = shares*currentPrice - position;
+        return new TickerSummary(ticker, position, shares, profit, currentPrice);
     }
 
     @RequestMapping(method = RequestMethod.POST)
