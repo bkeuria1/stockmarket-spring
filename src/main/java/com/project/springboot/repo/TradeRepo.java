@@ -13,10 +13,10 @@ public interface TradeRepo extends JpaRepository<Trade,Integer> {
 //    SELECT
 //            (SELECT COUNT(*) FROM ... WHERE ...)
 ////            - (SELECT COUNT(*) FROM ... WHERE ...) AS Difference
-    @Query(value = "select(select SUM(shares) from trades where ticker =:ticker and buying = TRUE) - (select SUM(shares) from trades where ticker =:ticker and buying = FALSE)", nativeQuery = true)
+    @Query(value = "select(select COALESCE(SUM(shares),0) from trades where ticker =:ticker and buying = TRUE) - (select COALESCE(SUM(shares), 0) from trades where ticker =:ticker and buying = FALSE)", nativeQuery = true)
     int getCurrentAmountShares(@Param("ticker") String ticker);
 
-    @Query(value = "select(select SUM(price*shares) from trades where ticker =:ticker and buying = TRUE) - (select SUM(price*shares) from trades where ticker =:ticker and buying = FALSE)", nativeQuery = true)
+    @Query(value = "select(select COALESCE(SUM(price*shares),0) from trades where ticker =:ticker and buying = TRUE) - (select COALESCE(SUM(price*shares), 0) from trades where ticker =:ticker and buying = FALSE)", nativeQuery = true)
     float getStockValue(@Param("ticker") String ticker);
 
     @Query(value = "select distinct ticker from trades", nativeQuery = true)

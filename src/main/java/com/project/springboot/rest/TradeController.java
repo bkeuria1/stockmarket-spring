@@ -53,6 +53,9 @@ public class TradeController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/tickerSummary")
     public TickerSummary getTickerSummary(@RequestParam String ticker){
+        String url = "https://3p7zu95yg3.execute-api.us-east-1.amazonaws.com/default/priceFeed2?ticker="+ticker+"&num_days=1";
+        String response = service.getApiData(url);
+        JSONObject jsonObject = new JSONObject(response);
         return new TickerSummary(ticker, service.getStockValue(ticker), service.getCurrentAmountShares(ticker), 100, 200);
     }
 
