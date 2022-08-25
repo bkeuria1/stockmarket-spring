@@ -1,9 +1,11 @@
 package com.project.springboot.service;
 
 
+import com.project.springboot.entities.ApiResponse;
 import com.project.springboot.entities.Trade;
 import com.project.springboot.repo.TradeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -31,10 +33,10 @@ public class TradeService  implements TradeServiceInterface {
     }
 
     @Override
-    public String getApiData(String url) {
+    public ApiResponse getApiData(String url) {
         RestTemplate restTemplate = new RestTemplate();
-        String result = restTemplate.getForObject(url, String.class);
-        return result;
+        ApiResponse apiResponse = restTemplate.getForObject(url, ApiResponse.class);
+        return apiResponse;
     }
 
     @Override

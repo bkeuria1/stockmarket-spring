@@ -1,9 +1,11 @@
 package com.project.springboot.rest;
 
+import com.project.springboot.entities.ApiResponse;
 import com.project.springboot.entities.TickerSummary;
 import com.project.springboot.entities.Trade;
 import com.project.springboot.service.TradeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
@@ -29,19 +31,19 @@ public class TradeController {
         return service.getTradeByTicker(ticker.toUpperCase());
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/currentPrices/{ticker}")
-    public String  getCurrentPrice(@PathVariable("ticker")String ticker){
-        String url = "https://c4rm9elh30.execute-api.us-east-1.amazonaws.com/default/cachedPriceData?ticker=" + ticker.toUpperCase();
-        return service.getApiData(url);
+//    @RequestMapping(method = RequestMethod.GET, value = "/currentPrices/{ticker}")
+//    public String  getCurrentPrice(@PathVariable("ticker")String ticker){
+//        String url = "https://c4rm9elh30.execute-api.us-east-1.amazonaws.com/default/cachedPriceData?ticker=" + ticker.toUpperCase();
+//        return service.getApiData(url);
+//
+//    }
 
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/history")
-    public String getPrice(@RequestParam String ticker, @RequestParam String days){
-        String url =  "https://3p7zu95yg3.execute-api.us-east-1.amazonaws.com/default/priceFeed2?ticker="+ticker+"&num_days="+days;
-       return service.getApiData(url);
-
-    }
+//    @RequestMapping(method = RequestMethod.GET, value = "/history")
+//    public String getPrice(@RequestParam String ticker, @RequestParam String days){
+//        String url =  "https://3p7zu95yg3.execute-api.us-east-1.amazonaws.com/default/priceFeed2?ticker="+ticker+"&num_days="+days;
+//       return service.getApiData(url);
+//
+//    }
     @RequestMapping(method = RequestMethod.GET, value = "/total")
     public int getTotalShares(@RequestParam String ticker){
         return service.getCurrentAmountShares(ticker);
@@ -53,15 +55,14 @@ public class TradeController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/tickerSummary")
-    public TickerSummary getTickerSummary(@RequestParam String ticker){
+    public TickerSummary getTickerSummary(@RequestParam String ticker) throws JSONException {
         String url = "https://3p7zu95yg3.execute-api.us-east-1.amazonaws.com/default/priceFeed2?ticker="+ticker+"&num_days=1";
-        String response = service.getApiData(url);
-        try {
-            JSONObject jsonObject = new JSONObject(response);
-        }catch(Exception e){
-
-        }
-        return new TickerSummary(ticker, service.getStockValue(ticker), service.getCurrentAmountShares(ticker), 100, 200);
+        ApiResponse apiResponse = service.getApiData(url);
+        float position = service.getStockValue(ticker);
+        float price = apiResponse.getPriceData().get(0).getValue();
+        int shares = service.getCurrentAmountShares(ticker);
+        float profit = shares*price - position;
+        return new TickerSummary(ticker, position, shares, profit, price);
     }
 
     @RequestMapping(method = RequestMethod.POST)
