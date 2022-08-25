@@ -1,10 +1,10 @@
 export class TickerSummary{
     constructor(
-        ticker:string,
-        shares:number,
-        position:number,
-        currentPrice:number,
-        profit:number
+        public ticker:string,
+        public shares:number,
+        public position:number,
+        public currentPrice:number,
+        public profit:number
 
     ){}
 }

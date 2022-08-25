@@ -1,1 +1,23 @@
-<p>account-status works!</p>
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Ticker</th>
+                <th scope="col">Shares</th>
+                <th scope="col">Position</th>
+                <th scope="col">Current Price</th>
+                <th scope="col">Gains/Loses</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let s of tickerSummaries">
+                <td>{{s.ticker}}</td>
+                <td>{{s.shares}}</td>
+                <td>{{s.position}}</td>
+                <td>{{s.currentPrice}}</td>
+                <td>{{s.profit}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

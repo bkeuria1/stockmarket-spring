@@ -15,6 +15,6 @@ export class SummaryService {
     return this.http.get(this.tickerUrl) as Observable<Array<string>>
   }
   getTickerSummary(ticker:string){
-    return this.http.get(this.tickerUrl + `?ticker=${ticker}`) as Observable<TickerSummary>
+    return this.http.get(this.summaryUrl + `?ticker=${ticker}`) as Observable<TickerSummary>
   }
 }
