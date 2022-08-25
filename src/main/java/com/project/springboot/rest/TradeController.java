@@ -4,6 +4,7 @@ import com.project.springboot.entities.TickerSummary;
 import com.project.springboot.entities.Trade;
 import com.project.springboot.service.TradeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -55,7 +56,11 @@ public class TradeController {
     public TickerSummary getTickerSummary(@RequestParam String ticker){
         String url = "https://3p7zu95yg3.execute-api.us-east-1.amazonaws.com/default/priceFeed2?ticker="+ticker+"&num_days=1";
         String response = service.getApiData(url);
-        JSONObject jsonObject = new JSONObject(response);
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+        }catch(Exception e){
+
+        }
         return new TickerSummary(ticker, service.getStockValue(ticker), service.getCurrentAmountShares(ticker), 100, 200);
     }
 
