@@ -14,6 +14,12 @@ export class TradeServiceService {
 
   getTrades() {
     return this.http.get(this.url) as Observable<Array<Trade>>
+
   }
+  
 }
+/*
+for every ticker, generate a summaryObject
+store each object in array (tickerSummary)
+*/
 
