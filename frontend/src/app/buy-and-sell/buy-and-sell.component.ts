@@ -15,7 +15,7 @@ export class BuyAndSellComponent implements OnInit {
   finalTicker!:string
   shares!:number
   currentPrice!:number
-  isBuying! : boolean
+  buying! : boolean
   tradeType!:string
   constructor(private priceService: PriceService, private tradeService :TradeServiceService) { }
 
@@ -32,13 +32,15 @@ export class BuyAndSellComponent implements OnInit {
   tradeStock(form:NgForm){
     console.log(this.tradeType)
     if(this.tradeType === "Buy"){
-      this.isBuying = true
+      this.buying = true
     }else{
-      this.isBuying = false
+      this.buying = false
     }
-    let trade:Trade = new Trade(this.finalTicker,"USD",this.shares,this.currentPrice,new Date(Date.now()),this.isBuying)
+    let trade:Trade = new Trade(this.finalTicker,"USD",this.shares,this.currentPrice,new Date(Date.now()),this.buying)
     console.log(trade)
-    this.tradeService.addTrade(trade)
+    this.tradeService.addTrade(trade).subscribe((response)=>{
+      console.log(response)
+    })
   }
 
 }

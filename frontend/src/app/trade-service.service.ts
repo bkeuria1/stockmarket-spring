@@ -15,8 +15,9 @@ export class TradeServiceService {
     return this.http.get(this.url) as Observable<Array<Trade>>
   }
   addTrade(trade:Trade){
-    return this.http.post(this.url+"/post", trade) as Observable<Trade>
-
+  
+    return this.http.post(this.url+"/post", trade) as Observable<any>
+      
   }
 
 }
