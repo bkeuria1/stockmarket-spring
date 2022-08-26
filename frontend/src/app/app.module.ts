@@ -8,13 +8,15 @@ import { BuyAndSellComponent } from './buy-and-sell/buy-and-sell.component';
 import { AccountStatusComponent } from './account-status/account-status.component';
 
 import {HttpClientModule} from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TradeHistoryComponent,
     BuyAndSellComponent,
-    AccountStatusComponent
+    AccountStatusComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
