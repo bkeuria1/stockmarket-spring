@@ -6,6 +6,7 @@
             <th scope="col">Currency</th>
             <th scope="col">Shares</th>
             <th scope="col">Date</th>
+            <th scope="col">Buy/Sell</th>
         </tr>
     </thead>
     <tbody>
@@ -15,6 +16,7 @@
             <td>{{t.currency}}</td>
             <td>{{t.shares}}</td>
             <td>{{t.date | date:'mediumDate'}}</td>
+            <td>{{t.buying?"Buy":"Sell"}}</td>
         </tr>
     </tbody>
 </table>

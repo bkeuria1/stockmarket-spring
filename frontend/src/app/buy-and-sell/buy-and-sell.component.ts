@@ -17,6 +17,7 @@ export class BuyAndSellComponent implements OnInit {
   currentPrice!:number
   buying! : boolean
   tradeType!:string
+  tradeSuccessful:boolean = false;
   constructor(private priceService: PriceService, private tradeService :TradeServiceService) { }
 
   ngOnInit(): void {
@@ -41,6 +42,10 @@ export class BuyAndSellComponent implements OnInit {
     this.tradeService.addTrade(trade).subscribe((response)=>{
       console.log(response)
     })
+
+    this.tradeSuccessful = true;
+
+
   }
 
 }

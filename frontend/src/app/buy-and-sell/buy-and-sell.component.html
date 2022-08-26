@@ -14,4 +14,9 @@
         </select>
         <button class = "btn btn-primary" type=""submit>Make Trade</button>
     </form>  
+
+    <div *ngIf="tradeSuccessful" class="alert alert-success">
+        <strong>Success!</strong> Transaction Completed.
+      </div>
+
 </div>
