@@ -16,6 +16,7 @@ export class TradeHistoryComponent implements OnInit {
    }
 
   ngOnInit(): void {
+
   }
 
 }

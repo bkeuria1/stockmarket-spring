@@ -1,1 +1,14 @@
-<p>buy-and-sell works!</p>
+<form #f = "ngForm" (ngSubmit)="searchStock(f)">
+    <input placeholder= "Search a stock" type="text" [(ngModel)]="ticker" name = "ticker">
+    <button class = "btn btn-primary" type=""submit>Search</button>
+</form>
+<p>Current Price for {{finalTicker}}: {{currentPrice}}</p>
+
+<form #trade = "ngForm" (ngSubmit)="tradeStock(f)">
+    <input placeholder= "Enter Shares" type="number" [(ngModel)]="shares" name = "shares">
+    <select [(ngModel)]="tradeType" name="tradeType">
+        <option>Buy</option>
+        <option>Sell</option>
+    </select>
+    <button class = "btn btn-primary" type=""submit>Make Trade</button>
+</form>

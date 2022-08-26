@@ -1,0 +1,16 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PriceService {
+
+  priceUrl: string = "http://localhost:8080/api/trades/currentPrice"
+  constructor(private http:HttpClient) { }
+  getCurrentPrice(ticker:string){
+    return this.http.get(`${this.priceUrl}?ticker=${ticker}`) as Observable<number>
+
+  }
+}

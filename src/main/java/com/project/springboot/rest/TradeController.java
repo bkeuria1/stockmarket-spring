@@ -31,19 +31,16 @@ public class TradeController {
         return service.getTradeByTicker(ticker.toUpperCase());
     }
 
-//    @RequestMapping(method = RequestMethod.GET, value = "/currentPrices/{ticker}")
-//    public String  getCurrentPrice(@PathVariable("ticker")String ticker){
-//        String url = "https://c4rm9elh30.execute-api.us-east-1.amazonaws.com/default/cachedPriceData?ticker=" + ticker.toUpperCase();
-//        return service.getApiData(url);
-//
-//    }
 
-//    @RequestMapping(method = RequestMethod.GET, value = "/history")
-//    public String getPrice(@RequestParam String ticker, @RequestParam String days){
-//        String url =  "https://3p7zu95yg3.execute-api.us-east-1.amazonaws.com/default/priceFeed2?ticker="+ticker+"&num_days="+days;
-//       return service.getApiData(url);
-//
-//    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/currentPrice")
+    public float getPrice(@RequestParam String ticker){
+        String url =  "https://3p7zu95yg3.execute-api.us-east-1.amazonaws.com/default/priceFeed2?ticker="+ticker+"&num_days=1";
+        ApiResponse response = service.getApiData(url);
+        float currentPrice = response.getPriceData().get(0).getValue();
+        return currentPrice;
+
+    }
     @RequestMapping(method = RequestMethod.GET, value = "/total")
     public int getTotalShares(@RequestParam String ticker){
         return service.getCurrentAmountShares(ticker);
@@ -65,7 +62,7 @@ public class TradeController {
         return new TickerSummary(ticker, position, shares, profit, currentPrice);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, value = "/post")
     public void addTrade(@RequestBody Trade trade){
         service.addNewTrade(trade);
     }
@@ -74,18 +71,5 @@ public class TradeController {
     public List<String> getAllTickers(){
         return service.getAllTickers();
     }
-    /*create some endpoint that gets all info about a stock: ticker,#shares, $total, avg price, current price, profit
-    //need seperate service functions to get these values
-    //sample response
-    {
-        ticker:xxx,
-        shares: xxx,
-        total: xxx
-        avg price:xxx
-        current_price: xxx,
-        profit: xxx
-    }
-
-     */
 
 }
